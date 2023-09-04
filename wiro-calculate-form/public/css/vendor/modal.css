@@ -1,0 +1,85 @@
+.modal {
+  --transition-time: 0.3s;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.9);
+  cursor: pointer;
+  overflow-y: auto;
+  overflow-x: hidden;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-time), visibility var(--transition-time);
+}
+
+// .modal::before {
+//   content: "";
+//   display: inline-block;
+//   vertical-align: middle;
+//   height: 100%;
+// }
+
+.modal__container {
+  position: relative;
+  margin: 50px 30px;
+  display: none;
+  vertical-align: middle;
+  border-radius: 20px;
+  cursor: pointer;
+  text-align: left;
+
+  @media (max-width: 1024px) {
+    width: 95%;
+  }
+
+  @media (max-width: 960px) {
+    margin: 50px auto;
+  }
+
+  > div {
+    cursor: default;
+  }
+}
+
+.modal.is-open {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity var(--transition-time), visibility var(--transition-time);
+}
+
+.modal__container.modal-open {
+  display: flex;
+  justify-content: center;
+}
+
+.fade {
+  opacity: 0;
+  transition: opacity var(--transition-time);
+}
+
+.fade.animate-open {
+  opacity: 1;
+  transition: opacity var(--transition-time);
+}
+
+.modal__content {
+  margin: 0 30px;
+
+  @media (max-width: 960px) {
+    margin: 0;
+  }
+}
+
+.disable-scroll {
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+}

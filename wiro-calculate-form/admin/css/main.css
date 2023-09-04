@@ -1,0 +1,169 @@
+.wcf-wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.wcf-item {
+  padding: 10px;
+  border: 1px solid #a8a7a7;
+  border-radius: 8px;
+  position: relative;
+}
+
+.wcf-item-overlay {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  top: 0;
+  left: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  display: none;
+}
+
+.wcf-item-adds {
+  display: flex;
+  margin: 0 0 15px;
+}
+
+.wcf-item-adds li {
+  margin: 0 5px;
+}
+
+.wcf-item-adds li button {
+  color: #fff;
+  background-color: #007bff;
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: 0;
+}
+
+.wcf-item-adds li button:hover {
+  background-color: #104e91;
+  cursor: pointer;
+}
+
+.wcf-input-wrapper {
+  padding: 10px 15px;
+  border: 1px solid #000;
+  border-radius: 20px;
+  margin: 5px 0;
+  transition: background 0.3s ease;
+  cursor: pointer;
+}
+
+.wcf-item-options-btn {
+  display: block;
+  cursor: pointer;
+  border-radius: 6px;
+  border: 0;
+}
+
+.wcf-field label {
+  vertical-align: baseline !important;
+}
+
+.wcf-item-options {
+  width: 100%;
+  display: none;
+  box-sizing: border-box;
+}
+
+.add-new-block {
+  color: #fff;
+  background-color: #007bff;
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: 0;
+  margin-top: 30px;
+  cursor: pointer;
+}
+
+.wcf-item-delete {
+  color: #fff;
+  background-color: #e04848;
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: 0;
+  margin-left: 5px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.wcf-item-options input {
+  width: 100%;
+  margin: 8px 0;
+}
+
+.wcf-field-actions {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px;
+}
+
+.wcf-field-actions button {
+  width: 48%;
+}
+
+.wcf-field-delete {
+  color: #fff;
+  background-color: #e04848;
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: 0;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.wcf-item-bind {
+  width: 100%;
+}
+
+.wcf-item-fields.shadow {
+  display: none;
+}
+
+.wcf-field-actions .wcf-field-additionals {
+  width: 100%;
+  margin-top: 10px;
+  border: 0;
+  cursor: pointer;
+}
+
+.wcf-item-additionals {
+  display: none;
+}
+
+.wcf-input-block {
+  margin-bottom: 20px;
+}
+
+.wcf-additional-options {
+  margin-top: 10px;
+}
+
+.wcf-additional-options {
+  display: none;
+}
+
+.wcf-input-block-fields {
+  display: flex;
+}
+
+.wcf-input-block-fields.radio input {
+  display: none;
+}
+
+.wcf-input-block-fields.radio input:checked + span {
+  background-color: yellow;
+}
+
+.wcf-input-block-fields.radio input + span {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: #a8a7a7;
+  margin-right: 10px;
+}

@@ -1,0 +1,828 @@
+.wcf-calc {
+  display: grid;
+  grid-template-columns: repeat(3, 300px);
+  gap: 20px 50px;
+  justify-content: center;
+}
+
+.wcf-block {
+  max-width: 100%;
+  padding: 20px;
+  -webkit-box-shadow: 0 3px 12px 1px rgba(0, 0, 0, 0.24);
+  -moz-box-shadow: 0 3px 12px 1px rgba(0, 0, 0, 0.24);
+  box-shadow: 0 3px 12px 1px rgba(0, 0, 0, 0.24);
+  background-color: #fff;
+  border-radius: 8px;
+  min-height: 300px;
+  box-sizing: border-box;
+}
+
+.wcf-input-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2px;
+}
+
+.wcf-item-tooltip-wrapper {
+  display: none;
+}
+
+.wcf-item-tooltip {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.wcf-item-tooltip::before {
+  content: "?";
+  font-size: 17px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  background-color: #ffd200;
+  color: #000;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  display: block;
+  line-height: 20px;
+  font-weight: 500;
+  z-index: 1;
+}
+
+.wcf-input-content {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.wcf-input-content label {
+  cursor: pointer;
+}
+
+.wcf-input-text {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1;
+  padding-left: 0.6em;
+  vertical-align: middle;
+  cursor: pointer;
+  font-family: AN, sans-serif;
+  user-select: none;
+}
+
+.wcf-input-content > input {
+  display: none;
+}
+
+.wcf-input-content input[type="radio"]:checked + .wcf-icon.radio::before {
+  transform: scale(1);
+  transition: 0.3s transform, 0.3s -webkit-transform, 0.3s -moz-transform,
+    0.3s -o-transform;
+}
+
+.wcf-input-content input[type="checkbox"]:checked + .wcf-icon.checkbox::before {
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -o-transform: translateY(0);
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.wcf-icon.radio {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  border: 1px solid gray;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+}
+
+.wcf-icon.radio::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: scale(0);
+  width: 7px;
+  height: 7px;
+  background: #4a4a4a;
+  border-radius: 50%;
+  margin-top: -3.3px;
+  margin-left: -3.5px;
+  transition: 0.3s transform, 0.3s -webkit-transform, 0.3s -moz-transform,
+    0.3s -o-transform;
+}
+
+.wcf-icon.checkbox {
+  -webkit-transition: 0.3s background, 0.5s ease all;
+  -o-transition: 0.3s background, 0.5s ease all;
+  -moz-transition: 0.3s background, 0.5s ease all;
+  transition: 0.3s background, 0.5s ease all;
+  position: relative;
+  color: #fff;
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  border: 1px solid #c4c4c4;
+  -webkit-border-radius: 1px;
+  -moz-border-radius: 1px;
+  border-radius: 1px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.wcf-icon.checkbox::before {
+  content: "";
+  -webkit-transition: 0.8s transform, 0.5s opacity;
+  -moz-transition: 0.8s transform, 0.5s opacity;
+  -webkit-transition: 0.5s opacity, 0.8s -webkit-transform;
+  -o-transition: 0.5s opacity, 0.8s -o-transform;
+  -moz-transition: 0.8s transform, 0.5s opacity, 0.8s -moz-transform;
+  transition: 0.8s transform, 0.5s opacity;
+  transition: 0.8s transform, 0.5s opacity, 0.8s -webkit-transform,
+    0.8s -moz-transform, 0.8s -o-transform;
+  -webkit-transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+  -moz-transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+  -o-transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+  transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+  position: absolute;
+  background: url(./images/custom-check.webp) 50% no-repeat;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-transform: translateY(-100%);
+  -moz-transform: translateY(-100%);
+  -ms-transform: translateY(-100%);
+  -o-transform: translateY(-100%);
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+/* Стили содержимого подсказки */
+.qtip-content {
+  background-color: #fff !important;
+  color: #000;
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.wcf-fields.shadow {
+  display: none;
+}
+
+/* Стили заголовка */
+.qtip-titlebar {
+  padding: 8px 14px;
+  margin: 0;
+  font-size: 1.7em;
+  font-weight: 400;
+  line-height: 1.1;
+  background-color: #f7f7f7 !important;
+  border-bottom: 1px solid #ebebeb;
+  -webkit-border-radius: 5px 5px 0 0;
+  -moz-border-radius: 5px 5px 0 0;
+  border-radius: 5px 5px 0 0;
+}
+
+/* Стили текста */
+.qtip-text {
+  font-size: 15px;
+}
+
+.qtip-default {
+  border: 1px solid rgba(0, 0, 0, 0.2) !important;
+}
+
+.wcf-block {
+  position: relative;
+}
+
+.wcf-block .wcf-block-shadow {
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  visibility: visible;
+  opacity: 1;
+  background-color: rgba(47, 43, 57, 0.9);
+  border-radius: 8px;
+  transition: 0.3s ease-in;
+}
+
+.wcf-block .wcf-block-shadow.disable {
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.3s ease-in;
+}
+
+.wcf-block-shadow-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.wcf-block-shadow-number {
+  font-size: 25px;
+  font-weight: 700;
+  border: 3px solid #f39530;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  width: 41px;
+  height: 41px;
+  margin: 0 auto 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+.wcf-block-shadow-title {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  margin-bottom: 0.5em;
+  margin-right: 10px;
+  margin-left: 10px;
+  color: #fff;
+}
+
+.wcf-item-options {
+  display: none;
+}
+
+.wcf-option-field.input input {
+  width: 90px;
+  transition: border 0.3s linear;
+  border: 1px solid rgb(196, 196, 196);
+  border-radius: 5px;
+  padding: 5px 8px;
+  font-size: 15px;
+  margin-bottom: 3px;
+  margin-left: 30px;
+}
+
+.wcf-option-field.textarea textarea {
+  resize: vertical;
+  margin-left: 30px;
+  max-width: 180px;
+  min-height: 64px;
+  border-radius: 3px;
+  border: 1px solid rgb(196, 196, 196);
+  transition: none;
+}
+
+.wcf-option-field.input input:focus,
+.wcf-option-field.count input:focus {
+  border-color: #ffc600;
+  transition: border 0.3s linear;
+  outline: none;
+}
+
+.wcf-option-field .units {
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.wcf-option-field.radio {
+  display: inline-block;
+  width: 61px;
+}
+
+.wcf-option-field.radio input {
+  display: none;
+}
+
+.wcf-option-field.radio input + label {
+  background: #fff;
+  border: 1px solid rgb(196, 196, 196);
+  color: #000;
+  padding: 7px 5px;
+  border-radius: 3px;
+  font-size: 17px;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-block;
+  user-select: none;
+  width: 100%;
+  margin-bottom: 6px;
+}
+
+.wcf-option-field.radio input:checked + label {
+  background-color: #ffc600;
+  border-color: transparent;
+}
+
+.wcf-option-field.count {
+  position: absolute;
+  top: -5px;
+  right: 35px;
+  width: 39px;
+}
+
+.wcf-option-field.count input {
+  width: 39px;
+  padding: 2px 7px;
+  outline: none;
+}
+
+.wcf-block-title {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  max-width: 150px;
+  margin: 0 auto 20px;
+}
+.wcf-block-title.shadow {
+  display: none;
+}
+
+.wcf-fields-wrapper.shadow {
+  display: none;
+}
+
+.wcf-block.total {
+  color: #000;
+  background-color: #f39530;
+}
+
+.wcf-block.total .amount {
+  display: inline-block;
+  font-size: 20px;
+  font-weight: 700;
+  display: inline-block;
+  margin-right: 14px;
+  margin-bottom: 0;
+}
+
+.wcf-block.total .amount-nav {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+@media (max-width: 960px) {
+  .wcf-calc {
+    grid-template-columns: repeat(2, 45%);
+    justify-content: center;
+  }
+}
+
+@media (max-width: 650px) {
+  .wcf-calc {
+    grid-template-columns: repeat(1, 85%);
+  }
+
+  .wcf-block-title {
+    font-size: 26px;
+  }
+
+  .wcf-input-text {
+    font-size: 18px;
+  }
+}
+
+.wcf-block.total .amount-nav .minus,
+.wcf-block.total .amount-nav .plus {
+  font-size: 25px;
+  font-weight: 700;
+  cursor: pointer;
+  user-select: none;
+  width: 25px;
+  background: #fff;
+  height: 25px;
+  vertical-align: middle;
+  line-height: 19px;
+  color: #000;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  text-align: center;
+  display: inline-block;
+  align-self: center;
+}
+
+.wcf-block.total .amount-nav .count {
+  width: 49px;
+  background-color: #1c1c1c;
+  color: #fff;
+  text-align: center;
+  height: 30px;
+  line-height: 100%;
+  font-size: 22px;
+  margin: 0 7px;
+  vertical-align: middle;
+  border: none;
+  padding: 0;
+  border-radius: 3px;
+}
+
+.wcf-block.total .price {
+  font-size: 42px;
+  font-weight: 700;
+  margin: 25px auto;
+  width: 300px;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  line-height: 80px;
+  height: 80px;
+  -webkit-box-shadow: 0 0 0 5px inset;
+  -moz-box-shadow: 0 0 0 5px inset;
+  box-shadow: 0 0 0 5px inset;
+}
+
+.wcf-block.total .price-next {
+  transform: none;
+  opacity: 1;
+  visibility: visible;
+  text-align: center;
+}
+
+.wcf-block.total .price-calculated {
+  transform: translateY(-100%);
+  opacity: 0;
+  visibility: hidden;
+}
+
+.wcf-block.total .attention {
+  font-size: 17px;
+  font-weight: 500;
+  margin: 29px auto;
+  text-align: center;
+  max-width: 300px;
+}
+
+.wcf-block.total .total-submit {
+  border-style: solid;
+  border-top-width: 0;
+  border-right-width: 0;
+  border-left-width: 0;
+  border-bottom-width: 0;
+  color: #ffffff;
+  border-color: rgb(47, 43, 57);
+  background-color: rgb(47, 43, 57);
+  padding-top: 15px;
+  padding-right: 30px;
+  padding-bottom: 15px;
+  padding-left: 30px;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 16px;
+  font-size: 16px;
+  line-height: 1;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 18px;
+  border-radius: 40px;
+  width: 100%;
+}
+
+.wcf-block.total .wcf-calc-reset {
+  -webkit-appearance: none;
+  border: none;
+  outline: none;
+  background: 0 0;
+  margin-top: 14px;
+  text-decoration: underline;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.29;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 0;
+  color: #000;
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.wcf-block.total .price-calculated,
+.wcf-block.total .price-next {
+  transition: 0.5s ease all;
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+
+.weight-wrapper {
+  font-size: 25px;
+  text-align: center;
+}
+
+#datepicker {
+  padding: 10px;
+  display: flex;
+}
+
+#datepicker .ui-widget.ui-widget-content {
+  margin: 0 auto;
+}
+
+#datepicker .ui-datepicker .ui-datepicker-header {
+  position: relative;
+  padding: 0.2em;
+  margin-bottom: 14px;
+  background: transparent;
+  border: 0;
+}
+
+#datepicker .ui-datepicker table {
+  width: 100%;
+  font-size: 0.9em;
+  border-collapse: collapse;
+  margin: 0 0 0.4em em;
+  border: 0;
+}
+
+#datepicker .ui-state-disabled,
+.ui-widget-content .ui-state-disabled,
+.ui-widget-header .ui-state-disabled {
+  opacity: 1;
+}
+
+#datepicker .ui-state-disabled span,
+.ui-widget-content .ui-state-disabled span {
+  color: #b7b7b7;
+}
+
+#datepicker .ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active {
+  position: relative;
+  background: #ffc600;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+#datepicker .ui-datepicker td a,
+.ui-datepicker td span {
+  display: block;
+  padding: 0.5em 0.2em;
+  text-align: center;
+  text-decoration: none;
+  color: #000;
+}
+
+#datepicker .ui-state-default,
+.ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default,
+.ui-button,
+html .ui-button.ui-state-disabled:hover,
+html .ui-button.ui-state-disabled:active {
+  border: 0;
+}
+
+#datepicker .ui-datepicker td {
+  border: 0;
+  padding: 1px;
+  text-align: center;
+  font-size: 15px;
+}
+
+#datepicker .ui-datepicker-week-end {
+  background-color: #f6f6f6;
+  pointer-events: none;
+  cursor: default;
+}
+
+#datepicker .ui-datepicker-week-end a.ui-state-default {
+  color: #b6b6b6;
+}
+
+#datepicker .ui-datepicker th {
+  padding: 0.7em 0.3em;
+  text-align: center;
+  font-weight: 500;
+  border: 0;
+  font-size: 13px;
+  color: #2b2b2b;
+}
+
+#datepicker .ui-state-default,
+.ui-widget-content .ui-state-default {
+  background-color: transparent;
+}
+
+#datepicker .ui-state-default.ui-state-active {
+  background: #ffc600;
+}
+
+#datepicker .ui-datepicker-prev .ui-icon {
+  background-position: 0%;
+  background-image: url("./images/arrow-left.webp");
+}
+
+#datepicker .ui-datepicker-next .ui-icon {
+  background-image: url("./images/arrow-right.webp");
+  background-position: 0%;
+}
+
+#datepicker .ui-datepicker .ui-datepicker-next,
+#datepicker .ui-datepicker .ui-datepicker-prev {
+  cursor: pointer;
+}
+
+#datepicker .ui-state-hover .ui-datepicker-next-hover {
+  border: 0;
+  background-color: transparent;
+}
+
+.modal__container[data-target="calc-form"] .modal__content {
+  background: #fff;
+  padding: 40px;
+  border-radius: 10px;
+  max-width: 440px;
+  position: relative;
+}
+
+.calc-form-title {
+  display: inline-block;
+  font-size: 30px;
+  padding-bottom: 0.43333em;
+  color: #2f2b39;
+  font-weight: 700;
+  line-height: 1;
+  position: relative;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20px !important;
+}
+
+.calc-form-desc {
+  font-size: 20px;
+  line-height: 1.25;
+  text-align: center;
+  margin-bottom: 40px !important;
+}
+
+.modal__container[data-target="calc-form"] .wpcf7-form p,
+.modal__container[data-target="calc-form"] .wpcf7-form div {
+  margin: 0;
+}
+
+.modal__container[data-target="calc-form"] .wpcf7-form textarea {
+  resize: vertical;
+}
+
+.modal__container[data-target="calc-form"] p > label.acceptance {
+  margin-top: 30px;
+}
+
+.wpcf7-form:not(.invalid) .wpcf7-not-valid-tip {
+  display: none;
+}
+
+.modal__container[data-target="calc-form"] .wpcf7-form p > label {
+  margin-bottom: 28px;
+  display: block;
+  font-size: 20px;
+  line-height: 1;
+  margin-bottom: 20px;
+  font-size: 19px;
+  display: block;
+}
+
+.modal__container[data-target="calc-form"]
+  .wpcf7-form
+  label
+  .wpcf7-form-control-wrap {
+  margin-top: 10px;
+}
+
+.modal__container[data-target="calc-form"]
+  .wpcf7-form
+  label
+  .wpcf7-form-control-wrap
+  input {
+  background-color: transparent;
+  font-size: 19px;
+  line-height: 1;
+  padding: 17px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  border: 2px solid #c4c4c4;
+  transition: border 0.2s linear;
+}
+
+.modal__container[data-target="calc-form"]
+  .wpcf7-form
+  label
+  .wpcf7-form-control-wrap
+  input:focus {
+  border: 2px solid #ffc600;
+  transition: border 0.2s linear;
+}
+
+.modal__container[data-target="calc-form"] .wpcf7-acceptance .wpcf7-list-item {
+  margin: 0;
+}
+
+.modal__container[data-target="calc-form"]
+  .wpcf7-acceptance
+  .wpcf7-list-item
+  > label {
+  display: flex;
+  align-items: center;
+}
+
+.modal__container[data-target="calc-form"]
+  .wpcf7-acceptance
+  .wpcf7-list-item
+  > label
+  .wpcf7-list-item-label {
+  line-height: 1.1;
+  font-size: 18px;
+}
+
+.modal__container[data-target="calc-form"] .wpcf7-submit {
+  font-size: 19px;
+  line-height: 1;
+  padding: 20px;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-radius: 41px;
+  width: 100%;
+  background-color: #ffba0c;
+  color: #30323b;
+  transition: background 0.2s linear;
+  margin-top: 30px;
+}
+
+.modal__container[data-target="calc-form"] .wpcf7-submit:hover {
+  background-color: #00CCFF
+  transition: background 0.2s linear;
+}
+
+.wpcf7-form br {
+  display: none !important;
+}
+
+.modal__close {
+  position: absolute;
+  top: 30px;
+  right: 20px;
+  width: 24px;
+  height: 24px;
+  opacity: 0.2;
+  cursor: pointer;
+  transition: opacity ease 0.5s;
+  background-color: transparent;
+  border: 0;
+  z-index: 100;
+}
+
+.modal__close:hover {
+  opacity: 1;
+  background-color: transparent;
+}
+
+.modal__close::before,
+.modal__close::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  display: block;
+  width: 24px;
+  height: 3px;
+  background: #000;
+}
+
+.modal__close::before {
+  transform: rotate(45deg);
+}
+
+.modal__close::after {
+  transform: rotate(-45deg);
+}
+
+@media (max-width: 650px) {
+  .modal__container[data-target="calc-form"] .modal__content {
+    padding: 40px 20px;
+  }
+  .modal__close {
+    opacity: 1;
+  }
+}
